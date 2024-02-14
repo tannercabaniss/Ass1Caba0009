@@ -1,0 +1,34 @@
+---
+title: "Assignement1"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Assignement1}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup, echo=FALSE}
+library(Ass1Caba0009)
+```
+
+# Introduction
+This is the vignette detailing the requirements for assignment 1.
+
+# Chapter 1
+This chapter deals with basic metrics between multivariable data including sample means, sample variances, and covariances.
+
+## Problem 1.1
+In this problem we were asked to determine the sample means, sample variances, and covariance between two vectors of length 7. The vectors used and metrics calculated are provided below.
+```{r, echo=FALSE}
+x1 <- c(3,4,2,6,8,2,5)
+x2 <- c(5,5.5,4,7,10,5,7.5)
+mean_var_cov(x1,x2)
+```
+
