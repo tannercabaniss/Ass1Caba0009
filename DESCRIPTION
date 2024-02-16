@@ -14,7 +14,8 @@ Suggests:
     rmarkdown,
     ggplot2,
     ggExtra,
-    cowplot
+    cowplot,
+    plot3D
 VignetteBuilder: knitr
 RoxygenNote: 7.3.0
 Depends: 

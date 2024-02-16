@@ -142,3 +142,42 @@ df_metrics(data)
 ```
 
 From the correlation coefficient plot we can see that there is a negative relationship between wind and all variables except for hydrocarbons (HC) which has a positive correlation. Solar radiation carries a positive correlation with carbon monoxide (CO), nitrogen dioxide (NO2), ozone (O3), and hydrocarbons (HC). Solar radiation carries a negative correlation with wind and nitric oxide (NO). Carbon monoxide (CO) possesses a positive correlation with all varialbes except wind. Nitric oxide (NO) carries a positive correlation with carbon monoxide (CO), nitrogen dioxide (NO2), and hydrocarbons (HC) with the others bearing a negative correlation. Nitrogen dioxide (NO2) shows a positive correlation with all variables except for wind. Ozone (O3) displays a negative correlation with wind and nitric oxide (NO) but a positive correlation with all other variables. Finally, hydrocarbons (HC) show a positive correlation with all other variables.
+
+# Chapter 2
+This chapter deals with matrix and vector manipulation and relationships.
+
+## Problem 2.1
+This problem presents two vectors $\textbf{x'} = [5,1,3], \textbf{y'} = [-1,3,1]$
+
+### Part A
+Part A asks us to simply graph the two vectors. In order to do this we will call a function called graph_vectors.
+```{r, echo=FALSE, fig.width=6, fig.height=6, fig.align='center'}
+vec_x <- c(5,1,3)
+vec_y <- c(-1,3,1)
+graph_vectors(vec_x,vec_y)
+```
+This plot shows the 3D representation of $\textbf{x'}$ and $\textbf{y'}$
+
+### Part B
+In this part we were asked to find the length of $\textbf{x}$, the angle between $\textbf{x}$ and $\textbf{y}$ as well as the projection of $\textbf{y}$ on $\textbf{x}$. To do this we will make use of some simple functions included in R as well as user built functions for the angle between vectors and the projection of one vector on another.
+```{r, echo=FALSE}
+x_length <- sqrt(sum(vec_x^2))
+cat("Vector x has length:", x_length, "\n")
+angle_list <- angle_vectors(vec_x,vec_y)
+cat("Angle between vectors in degrees", angle_list$Degrees, "\n")
+cat("Angle between vectors in radians", angle_list$Radians, "\n")
+projection_y_x <- round(projection_vectors(vec_x,vec_y), 4)
+cat("Projection of y on x [", projection_y_x, "]")
+```
+
+### Part C
+Part C asks us to plot the mean corrected vectors. We will utilize the plotting function from earlier after converting the vectors.
+```{r, echo=FALSE, fig.width=6, fig.height=6, fig.align='center'}
+mean_x <- mean(vec_x)
+mean_y <- mean(vec_y)
+mean_corr_vec_x <- vec_x - mean_x
+mean_corr_vec_y <- vec_y - mean_y
+cat("Mean corrected vector x [", mean_corr_vec_x, "]\n")
+cat("Mean corrected vector y [", mean_corr_vec_y, "]\n")
+graph_vectors(mean_corr_vec_x,mean_corr_vec_y)
+```
