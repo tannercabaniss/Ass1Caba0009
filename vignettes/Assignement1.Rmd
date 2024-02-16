@@ -181,3 +181,161 @@ cat("Mean corrected vector x [", mean_corr_vec_x, "]\n")
 cat("Mean corrected vector y [", mean_corr_vec_y, "]\n")
 graph_vectors(mean_corr_vec_x,mean_corr_vec_y)
 ```
+
+## Problem 2.2
+In this problem we are asked to perform several matrix operation including scalar multiplication, matrix multiplication, and matrix transposition. We are provided the following matrices.
+$$\textbf{A}=\begin{bmatrix}-1 & 3 \\ 4 & 2\end{bmatrix}, \textbf{B}=\begin{bmatrix}4 & -3 \\ 1 & -2 \\ -2 & 0 \end{bmatrix}, \textbf{C}=\begin{bmatrix}5 \\ -4 \\ 2 \end{bmatrix}$$
+```{r, echo=FALSE}
+matA <- matrix(c(-1,3,4,2), nrow=2, ncol=2, byrow=TRUE)
+matB <- matrix(c(4,-3,1,-2,-2,0), nrow=3, ncol=2, byrow=TRUE)
+matC <- matrix(c(5,-4,2), nrow=3, ncol=1, byrow=TRUE)
+```
+
+
+### Part A
+In part a we are asked to perform scalar multiplication on matrix A, $5\textbf{A}$
+```{r, echo=FALSE}
+matA_5 <- matA * 5
+cat("Matrix A multiplied by scalar 5\n")
+print(matA_5)
+```
+
+### Part B
+We were asked to multiply matrix B and matrix A, $\textbf{B}\textbf{A}$
+```{r, echo=FALSE}
+matBA <- matB %*% matA
+cat("Matrix B multiplied by matrix A\n")
+print(matBA)
+```
+
+### Part C
+We were asked to multiply the transpose of matrix A and the transpose of matrix B, $\textbf{A'}\textbf{B'}$
+```{r, echo=FALSE}
+matAtBt <- t(matA) %*% t(matB)
+cat("Transpose of A multiplied by transpose of B\n")
+print(matAtBt)
+```
+
+### Part D
+We were asked to multiply the transpose of matrix C by matrix B, $\textbf{C'}\textbf{B}$
+```{r, echo=FALSE}
+matCtB <- t(matC) %*% matB
+cat("Transpose of C multiplied by B\n")
+print(matCtB)
+```
+
+### Part E
+We were asked if the multiplication of matrix A by matrix B is defined, $\textbf{A}\textbf{B}$. In order for matrix multiplication to be defined the number of columns in matrix 1 must be the same as the number of rows for matrix 2. As matrix A has only two columns but matrix B has three rows, the multiplication, $\textbf{A}\textbf{B}$, is not defined.
+
+## Problem 2.3
+In this problem we are asked to verify some common matrix properties around transposition with some new matrices defined below.
+$$\textbf{A}=\begin{bmatrix}2 & 1 \\ 1 & 3\end{bmatrix}, \textbf{B}=\begin{bmatrix}1 & 4 & 2 \\ 5 & 0 & 3 \end{bmatrix}, \textbf{C}=\begin{bmatrix}1 & 4 \\ 3 & 2 \end{bmatrix}$$
+```{r, echo=FALSE}
+matA <- matrix(c(2,1,1,3), nrow=2, ncol=2, byrow=TRUE)
+matB <- matrix(c(1,4,2,5,0,3), nrow=2, ncol=3, byrow=TRUE)
+matC <- matrix(c(1,4,3,2), nrow=2, ncol=2, byrow=TRUE)
+```
+
+### Part A
+We are asked to confirm that $(\textbf{A}')'=\textbf{A}. To do this we will display the double transpose of matrix A as well as the original matrix A.
+```{r, echo=FALSE}
+matAtt <- t(t(matA))
+cat("Double transpose of A\n")
+print(matAtt)
+cat("Original matrix A\n")
+print(matA)
+```
+This allows us to confirm that the double transpose of a matrix is equal to the original matrix.
+
+### Part B
+We are asked to confirm that the inverse of a transposed matrix is equivalent to the transpose of that same matrix's inverse, $(\textbf{C}')^{-1}=(\textbf{C}^{-1})'$.
+```{r, echo=FALSE}
+matCti <- solve(t(matC))
+matCit <- t(solve(matC))
+cat("Inverse of C tranpose")
+print(matCti)
+cat("Transpose of C inverse")
+print(matCit)
+```
+This confirms that $(\textbf{C}')^{-1}=(\textbf{C}^{-1})'$.
+
+### Part C
+We were asked to confirm that the transposition of the product of two matrices is equal to the multiplication in the opposite direction of the separately transposed matrices, $(\textbf{AB})'=\textbf{B}'\textbf{A}'$.
+```{r, echo=FALSE}
+matAB_t <- t(matA %*% matB)
+matBtAt <- t(matB) %*% t(matA)
+cat("Transpose of matrix AB")
+print(matAB_t)
+cat("Transpose B multiplied by transpose A")
+print(matBtAt)
+```
+This confirms that $(\textbf{AB})'=\textbf{B}'\textbf{A}'$.\
+
+### Part D
+In the last part of this question we are posed the question if generally for a matrix A of size (mxk) and a matrix B of size (kxl) if $(\textbf{AB})'=\textbf{B}'\textbf{A}'$ is still valid. 
+
+As the limiting factor here is defined matrix multiplication lets take a look at both sides of the equation. On the left side we would have k columns and k rows which is valid for matrix multiplication. On the right side we would have k columns and k rows following transposition which is also valid for matrix multiplication.
+
+## Problem 2.4
+In this problem we are required to prove some relations of inverse matrices. We are told that both $\textbf{A}^{-1}$ and $\textbf{B}^{-1}$ exist.
+
+### Part A
+Here, we wish to prove $(\textbf{A}')^{-1}=(\textbf{A}^{-1})'$
+
+First we need to write out some definitions.
+$$\textbf{AA}^{-1} = \textbf{I}, \textbf{I} = \textbf{I}',(\textbf{AA}^{-1})'=(\textbf{A}^{-1})'\textbf{A}'$$
+
+Now lets start modifying our original statement.
+$$(\textbf{A}')^{-1}=(\textbf{A}^{-1})'$$
+$$(\textbf{A}')^{-1}\textbf{A}'=(\textbf{A}^{-1})'\textbf{A}'$$
+We know that
+$$(\textbf{A}^{-1})'\textbf{A}'=\textbf{I}$$
+from our definitions above.  
+
+So our equation now becomes
+$$(\textbf{A}')^{-1}\textbf{A}'=\textbf{I}$$
+
+Now we can apply a transpose to both sides.
+$$((\textbf{A}')^{-1}\textbf{A}')'=\textbf{I}'$$
+
+We know that $(\textbf{A}')'=\textbf{A}$ by the definition of transposition. So our equation becomes
+$$\textbf{A}(\textbf{A}^{-1})=\textbf{I}'$$
+
+We can now see that $\textbf{AA}^{-1}=\textbf{I}'=\textbf{I}$ so our equation simplifies to
+$$\textbf{I} = \textbf{I}$$  
+
+which is true by the definition of equality, therefore, proving the original statement is also true.
+
+### Part B
+We were tasked with proving the following...
+$$(\textbf{AB})^{-1}=\textbf{B}^{-1}\textbf{A}^{-1}$$  
+
+We are given that the following is true...
+$$(\textbf{B}^{-1}\textbf{A}^{-1})\textbf{AB}=\textbf{B}^{-1}(\textbf{A}^{-1}\textbf{A})\textbf{B}=\textbf{B}^{-1}\textbf{B}=\textbf{I}$$
+
+Let us multiply by sides by $\textbf{AB}$ yielding...
+$$(\textbf{AB})^{-1}\textbf{AB}=(\textbf{B}^{-1}\textbf{A}^{-1})\textbf{AB}$$
+
+According to our definitions above we know that the right side is equal to $\textbf{I}$ giving the equation...
+$$(\textbf{AB})^{-1}\textbf{AB}=\textbf{I}$$
+
+We also know from the definition of inverse multiplication that the inverse of a matrix multiplied by the original matrix is the identity matrix or $(\textbf{AB})^{-1}\textbf{AB}={I}$ so that leaves us with...
+$$\textbf{I}=\textbf{I}$$
+
+This confirms that our original statement, $(\textbf{AB})^{-1}=\textbf{B}^{-1}\textbf{A}^{-1}$ is true.
+
+## Problem 2.5
+In this problem we were tasked with determining if a matrix is orthogonal. The matrix is shown below and loaded into the variable matQ.
+$$\textbf{Q} = \begin{bmatrix}  \frac{5}{13} & \frac{12}{13} \\ \frac{-12}{13} & \frac{5}{13} \end{bmatrix}$$
+```{r, echo=FALSE}
+matQ = matrix(c(5/13,12/13,-12/13,5/13), nrow=2, ncol=2, byrow=TRUE)
+```
+
+In order to confirm that the matrix is orthogonal we will see if it satisfies the property that states that $\textbf{Q}\textbf{Q}'=\textbf{I}$
+```{r, echo=FALSE}
+matQt <- t(matQ)
+matQQt <- matQ %*% matQt
+cat("Result of QQ'")
+print(matQQt)
+```
+As the result is the identity matrix $\textbf{I}$, we know that the matrix $\textbf{Q}$ is orthogonal
