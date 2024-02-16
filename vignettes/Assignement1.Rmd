@@ -32,3 +32,51 @@ x2 <- c(5,5.5,4,7,10,5,7.5)
 mean_var_cov(x1,x2)
 ```
 
+## Problem 1.2
+In this problem we were provided data relating used car sales by age of the car in years and selling price in thousands of dollars.
+
+### Part A
+In part A we were asked to construct a scatter plot of the data as well as including the marginal dot diagrams.
+```{r, echo=FALSE, fig.width=6, fig.height=4, fig.align='center'}
+x1 <- c(1,2,3,3,4,5,6,8,9,11)
+x2 <- c(18.95,19.00,17.95,15.54,14.00,12.95,8.94,7.49,6.00,3.99)
+scatter_marginal(x1,x2)
+```
+This plot shows the distribution of data and a general trend towards older cars being cheaper. The problem asked for dot diagrams. However, after trying for about an hour to create separate plots in ggplot2 and mending them together with cowplot, the result was not near as informative as the graph above. Therefore, I included this graph in lieu of presenting the other more poorly formatted option.
+
+### Part B
+This question asks us to infer the sign of the covariance $s_{12}$ from the scatter plot. Given the negative correlation between car age and selling price (i.e., as age increase, selling price decreases) the covariance between the two variables can be inferred to be negative.
+
+### Part C
+This part asked for the sample means, sample variances, sample covariance, and sample correlation coefficient. The function from problem 1 "mean_var_cov" can be used here as well as their is a conditional for displaying the correlation coefficient.
+```{r, echo=FALSE}
+x1 <- c(1,2,3,3,4,5,6,8,9,11)
+x2 <- c(18.95,19.00,17.95,15.54,14.00,12.95,8.94,7.49,6.00,3.99)
+mean_var_cov(x1,x2,TRUE)
+```
+The negative correlation coefficient confirms what we inferred in the previous part of this problem.
+
+### Part D
+This problem asks us to display the sample mean array, sample variance-covariance array, and the sample correlation array. This is done with a new function that is based on the first mean_var_cov function used in problem 1.1 and problem 1.2c.
+```{r, echo=FALSE}
+x1 <- c(1,2,3,3,4,5,6,8,9,11)
+x2 <- c(18.95,19.00,17.95,15.54,14.00,12.95,8.94,7.49,6.00,3.99)
+vec_mean_var_cov(x1,x2)
+```
+
+## Problem 1.3
+This problem asks us to follow a similar procedure to that outlined above in problem 1.2d, but in this case we will be using three vectors (x1,x2,x3) instead of just two (x1,x2).
+```{r, echo=FALSE}
+x1 <- c(9,2,6,5,8)
+x2 <- c(12,8,6,4,10)
+x3 <- c(3,4,0,2,1)
+vec_mean_var_cov(x1,x2,x3)
+```
+Shown above are the sample mean array, sample cov/var matrix, and sample cor matrix as requested by the instructions in problem 1.3.
+
+## Problem 1.4
+For this problem a data file was provided containing information about the world's 10 largest companies with regard to their sales (x1), profits (x2), and assets (x3). The first step is to import the data and then we will work to construct scatter plots with marginal diagrams similar to problem 1.2.
+```{r}
+
+```
+

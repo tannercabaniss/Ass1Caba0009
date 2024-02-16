@@ -2,24 +2,26 @@
 % Please edit documentation in R/mean_var_cov.R
 \name{mean_var_cov}
 \alias{mean_var_cov}
-\title{Mean, Variance, and Covariance for Two Vectors}
+\title{Mean, Variance, Covariance, and Correlation for Two Vectors}
 \usage{
-mean_var_cov(x1, x2)
+mean_var_cov(x1, x2, cor = FALSE)
 }
 \arguments{
 \item{x1}{input vector 1}
 
 \item{x2}{input vector 2}
+
+\item{cor}{allows user to select if they want to calculate the correlation coefficient}
 }
 \value{
-prints the sample means, sample variances, and covariance cleanly
+prints the sample means, sample variances, covariance, and correlation (if requested) cleanly
 }
 \description{
-This function calculates common metrics between two vectors including sample mean, sample variance, and covariance
-between the vectors.
+This function calculates common metrics between two vectors including sample mean, sample variance, covariance,
+and correlation (if requested) between the vectors.
 }
 \examples{
 x1 <- c(1,2,3,4,5,6)
 x2 <- c(4,5,3,2,4,6)
-mean_var_cov(x1, x2)
+mean_var_cov(x1, x2, cor=TRUE)
 }
