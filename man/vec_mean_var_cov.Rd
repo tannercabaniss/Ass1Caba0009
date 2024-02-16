@@ -4,7 +4,7 @@
 \alias{vec_mean_var_cov}
 \title{Mean, Variance, Covariance, and Correlation Vectors for Sample Two Vectors}
 \usage{
-vec_mean_var_cov(x1, x2, x3 = 0)
+vec_mean_var_cov(x1, x2, x3 = NULL)
 }
 \arguments{
 \item{x1}{input vector 1}

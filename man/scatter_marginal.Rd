@@ -4,18 +4,24 @@
 \alias{scatter_marginal}
 \title{Scatter Plot with Marginal Dot Diagrams}
 \usage{
-scatter_marginal(x1, x2)
+scatter_marginal(x1, x2, xlab = "x1", ylab = "x2", dotsize = 3)
 }
 \arguments{
 \item{x1}{input vector 1}
 
 \item{x2}{input vector 2}
+
+\item{xlab}{label for x axis}
+
+\item{ylab}{label for y axis}
+
+\item{dotsize}{allows the user to set the dotsize while calling the function}
 }
 \value{
 a scatter plot with marginal dot diagrams for both axes
 }
 \description{
-This function will take in two vectors of equal length
+This function will take in two vectors of equal length and create a scatter plot as well as marginal diagrams.
 }
 \examples{
 x1 <- c(1,2,3,4,5,6)

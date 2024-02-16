@@ -14,7 +14,7 @@
 #' x1 <- c(1,2,3,4,5,6)
 #' x2 <- c(4,5,3,2,4,6)
 #' vec_mean_var_cov(x1, x2)
-vec_mean_var_cov <- function(x1, x2, x3=0) {
+vec_mean_var_cov <- function(x1, x2, x3=NULL) {
   if (length(x3)==0) {
     data <- data.frame(x1,x2)
   }

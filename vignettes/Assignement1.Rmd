@@ -37,10 +37,10 @@ In this problem we were provided data relating used car sales by age of the car 
 
 ### Part A
 In part A we were asked to construct a scatter plot of the data as well as including the marginal dot diagrams.
-```{r, echo=FALSE, fig.width=6, fig.height=4, fig.align='center'}
+```{r, echo=FALSE, fig.width=6, fig.height=6, fig.align='center'}
 x1 <- c(1,2,3,3,4,5,6,8,9,11)
 x2 <- c(18.95,19.00,17.95,15.54,14.00,12.95,8.94,7.49,6.00,3.99)
-scatter_marginal(x1,x2)
+scatter_marginal(x1,x2,"Age of Car (years)","Price of Car (thousands of dollars)")
 ```
 This plot shows the distribution of data and a general trend towards older cars being cheaper. The problem asked for dot diagrams. However, after trying for about an hour to create separate plots in ggplot2 and mending them together with cowplot, the result was not near as informative as the graph above. Therefore, I included this graph in lieu of presenting the other more poorly formatted option.
 
@@ -75,8 +75,70 @@ vec_mean_var_cov(x1,x2,x3)
 Shown above are the sample mean array, sample cov/var matrix, and sample cor matrix as requested by the instructions in problem 1.3.
 
 ## Problem 1.4
-For this problem a data file was provided containing information about the world's 10 largest companies with regard to their sales (x1), profits (x2), and assets (x3). The first step is to import the data and then we will work to construct scatter plots with marginal diagrams similar to problem 1.2.
-```{r}
+For this problem a data file was provided containing information about the world's 10 largest companies with regard to their sales (x1), profits (x2), and assets (x3). The first step is to import the data and then we will work to construct scatter plots with marginal diagrams similar to problem 1.2 for the x1 and x2 variables. Data was imported using the RStudio 'import dataset' tool, col names where given, and then the command usethis::use_data(Problem_1_4) was called to create an .rda object in the data folder which could then be properly documented in R/data.R.  
 
+### Part A
+In part A, we were asked to create a scatter plot of the first two columns in the table (Sales,Profits) with marginal diagrams. We can reuse the same function from problem 1.2 here after making modifications to allow different axis labels.
+```{r, echo=FALSE, fig.width=6, fig.height=6, fig.align='center'}
+sales <- Problem_1_4[,1]
+profits <- Problem_1_4[,2]
+scatter_marginal(sales,profits,"Sales (billions)","Profits (billions)")
+```
+The graph above shows the relationship between sales and profits wherein increasing sales leads to increasing profits.
+
+### Part B
+We were asked to find the sample means, sample variances, sample covariance, and sample correlation coefficient. This can be accomplished with the 'mean_var_cov' function.
+```{r, echo=FALSE}
+sales <- Problem_1_4[,1]
+profits <- Problem_1_4[,2]
+mean_var_cov(sales,profits,cor=TRUE)
+```
+The positive correlation coefficient allows us to conclude that as sales (x1) increased so does profits (x2).
+
+## Problem 1.5
+This problem uses the same data as problem 1.4 but looks at the relationships between profits and assets (x2,x3) as well as sales and assets (x1,x3)
+
+### Part A
+In this part we were asked to create two scatter plots: one for profits vs assets (x2,x3) and one for sales vs assets (x1,x3). This can be accomplished with our scatter_marginal function from earlier.
+```{r, echo=FALSE, fig.width=6, fig.height=6, fig.align='center'}
+sales <- Problem_1_4[,1]
+profits <- Problem_1_4[,2]
+assets <- Problem_1_4[,3]
+scatter_marginal(profits,assets,"Profits (billions)","Assets (billions)")
 ```
 
+The plot of profits vs assets seems to display a slight negative correlation. However, given the sparsity of the data and the rather random distribution, this conclusion is not very strong.
+
+```{r, echo=FALSE, fig.width=6, fig.height=6, fig.align='center'}
+scatter_marginal(sales,assets,"Sales (billions)","Assets (billions)")
+```
+
+Th plot of sales vs assets also seems to show a slight negative correlation. But, once again due to the sparsity of the data, it is difficult to draw any concrete conclusions based purely on a scatter plot.
+
+### Part B
+We were now asked to compute the column means, variance/covariance matrix, and the correlation coefficient matrix involving all three variables: sales, profits, and assets (x1,x2,x3).
+```{r, echo=FALSE}
+vec_mean_var_cov(sales,profits,assets)
+```
+
+These metrics confirm our suspicions from the scatter plots showing that there is a negative correlation between profits and assets (x2,x3) and well as for sales and assets (x1,x3).
+
+## Problem 1.6
+In this problem we were asked to create marginal diagrams and find some metrics for a data frame containing seven variables which is stored in the data/ folder as 'Table_1_5'. In order to accomplish this the data was imported similarly to before using the built in rstudio function as well as the usethis library.
+
+### Part A
+In order to plot the all of the different combinations of variables we will utilize a new function called subplots_scatter_marginal which relies on the original scatter_marginal function to create the plots and then arranges them.
+```{r, echo=FALSE, fig.width=8, fig.height=20, fig.align='center'}
+data <- Table_1_5
+subplots_scatter_marginal(data)
+```
+
+These plots allow us a brief glimpse of the potential relationships between all 7 of the presented variables
+
+### Part B
+Now we were asked to display the sample mean vector, the covariance matrix, and the correlation matrix. This can be done by using a new function called df_metrics which provides these statistics from a dataframe input.
+```{r, echo=FALSE}
+df_metrics(data)
+```
+
+From the correlation coefficient plot we can see that there is a negative relationship between wind and all variables except for hydrocarbons (HC) which has a positive correlation. Solar radiation carries a positive correlation with carbon monoxide (CO), nitrogen dioxide (NO2), ozone (O3), and hydrocarbons (HC). Solar radiation carries a negative correlation with wind and nitric oxide (NO). Carbon monoxide (CO) possesses a positive correlation with all varialbes except wind. Nitric oxide (NO) carries a positive correlation with carbon monoxide (CO), nitrogen dioxide (NO2), and hydrocarbons (HC) with the others bearing a negative correlation. Nitrogen dioxide (NO2) shows a positive correlation with all variables except for wind. Ozone (O3) displays a negative correlation with wind and nitric oxide (NO) but a positive correlation with all other variables. Finally, hydrocarbons (HC) show a positive correlation with all other variables.
